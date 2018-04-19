@@ -7,15 +7,10 @@ import java.util.regex.*;
 public class Solution {
 
     static boolean check(int i,String s){
-        
-        if(i==0)
-            s=s.substring(1);
-        else if(i+1!=s.length())
-             s=s.substring(0,i)+s.substring(i+1);
-        else
-            s=s.substring(0,s.length()-1);
-        
-         StringBuilder str =new StringBuilder(s);
+                 
+        s=s.substring(0,i)+s.substring(i+1);
+         
+        StringBuilder str =new StringBuilder(s);
         
         str.reverse();
         
@@ -33,18 +28,19 @@ public class Solution {
          
         str.reverse();
     
-        if(s.equals(str.toString()))
-            return -1;
-        else{
-            for(int i=0;i<s.length();i++){
-                if(s.charAt(i)!=str.charAt(i)){
+       
+            for(int i=0;i<s.length()/2;i++){
+                if(s.charAt(i)!=s.charAt(s.length()-1-i)){
                        if(check(i,s)){
                            return i;
                        }
+                        if(check(s.length()-1-i,s)){
+                           return s.length()-1-i;
+                       }
                    }
                 }
-            }
-           return -100;
+            
+           return -1;
     }
     
 
